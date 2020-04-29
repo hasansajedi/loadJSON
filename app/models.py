@@ -42,6 +42,15 @@ class BaseModel(models.Model):
 
 
 class EmailModel(BaseModel):
+    """
+    A model for control email.
+
+    Attributes:
+        id_got (int): Refers to id of image per email.
+        title (str): Refers to title of image per email.
+        description (str): Refers to description of image per email.
+        imageUrl (url): Refers to url of image per email.
+    """
     id = models.AutoField(primary_key=True)
     id_got = models.BigIntegerField(null=False, blank=False)
     title = models.CharField(max_length=150, null=False, blank=False)

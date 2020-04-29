@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="w-100">
+                {% if errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ errors }}
+                    </div>
+                {% endif %}
+                {% if messages %}
+                    <div class="alert alert-primary" role="alert">
+                        {% for item in messages %}
+                            <p>{{ item }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            {% if parse_url not in request.path %}
+                <div class="card mb-1">
+                    <div class="card-header">
+                        Select JSON file to analyze:
+                    </div>
+                    <div class="card-body text-center">
+                        <div class="row">
+                            <div class="col-sm-12 text-left">
+                                <form method="POST" class="post-form" action="{% url 'app:parse' %}">
+                                    {% csrf_token %}
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"
+                                                  id="basic-addon3">Json File Url goes here:</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="jsonURL" name="jsonURL"
+                                               aria-describedby="basic-addon3">
+                                        <div class="input-group-append">
+                                            <button type="submit" class="btn btn-primary">
+                                                Start analyze
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="w-100"></div>
+
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            <div class="w-100"></div>
+            {% if parse_url in request.path %}
+                <table class="table table-light">
+                    <thead class="thead-light">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Title</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for row in data %}
+                        <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{ row.id }}</td>
+                            <td>{{ row.title }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <div class="w-100"></div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="row">
+        <div class="row mr-1 ml-1">
+            {% for item in emails %}
+                <div class="col-sm-3 mb-2">
+                    <div class="card text-center">
+                        <div class="card-header pl-0 pr-0">
+                            {{ item.title|slice:":35" }}
+                        </div>
+                        <div class="card-body text-center p-0">
+                            <a href="#" data-toggle="modal" data-target="#modalCenter_{{ item.id_got }}">
+                                <img class="img-thumbnail" src="{{ item.imageUrl }}"/>
+                            </a>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="modalCenter_{{ item.id_got }}" tabindex="-1" role="dialog"
+                                 aria-labelledby="modalCenter_{{ item.id_got }}Title" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <p class="modal-title"
+                                               id="modalCenter_{{ item.id_got }}Title">{{ item.title }}</p>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body text-left">
+                                            <p>{{ item.description }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
