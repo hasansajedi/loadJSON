@@ -38,3 +38,6 @@ or, You can use CircleCI to build, test and deploy the project. The config file 
 > To access all data, http://127.0.0.1:8000/report . 
 
 
+To access admin panel you can use below information:
+* Username: admin
+* Password: qazWSX@123
